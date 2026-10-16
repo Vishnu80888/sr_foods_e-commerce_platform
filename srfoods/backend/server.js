@@ -81,18 +81,19 @@ app.use((err, _req, res, _next) => {
 });
 
 // ── Connect & Start ───────────────────────────────────────────
-const PORT      = process.env.PORT      || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/srfoods';
+const connectDB = require('./config/db');
 
-mongoose.connect(MONGO_URI)
-  .then(async () => {
-    console.log('✅ MongoDB connected');
-    const Product = require('./models/Product');
-    if ((await Product.countDocuments()) === 0) {
-      await require('./config/seed')();
-      console.log('🌱 Database seeded with products, promo codes & admin user');
-    }
-    app.listen(PORT, () =>
-      console.log(`\n🚀 SR Foods API running → http://localhost:${PORT}/api/health\n`));
-  })
-  .catch(err => { console.error('❌ MongoDB connection failed:', err.message); process.exit(1); });
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
+  connectDB()
+    .then(() => {
+      app.listen(PORT, () =>
+        console.log(`\n🚀 SR Foods API running → http://localhost:${PORT}/api/health\n`));
+    })
+    .catch(err => {
+      console.error('❌ MongoDB connection failed:', err.message);
+      process.exit(1);
+    });
+}
+
+module.exports = app;

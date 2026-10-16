@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "outputDirectory": "srfoods/frontend/build",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

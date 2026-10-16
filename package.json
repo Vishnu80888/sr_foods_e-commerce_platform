@@ -2,13 +2,22 @@
   "name": "srfoods-platform",
   "version": "2.0.0",
   "description": "SR Foods - Fresh Chapati & Poori E-Commerce Platform",
-  "main": "srfoods/backend/server.js",
+  "main": "api/index.js",
   "scripts": {
-    "install:all": "npm --prefix srfoods/backend install && npm --prefix srfoods/frontend install",
-    "build": "npm --prefix srfoods/frontend install && npm --prefix srfoods/frontend run build && npm --prefix srfoods/backend install",
+    "build": "npm --prefix srfoods/frontend install && npm --prefix srfoods/frontend run build",
+    "build:local": "npm --prefix srfoods/frontend run build",
     "start": "node srfoods/backend/server.js",
     "backend": "npm --prefix srfoods/backend start",
     "frontend": "npm --prefix srfoods/frontend start"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.3.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.1"
   },
   "engines": {
     "node": ">=18.0.0"
